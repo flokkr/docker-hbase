@@ -1,3 +1,6 @@
-FROM elek/bigdata-base:2 
-RUN wget http://xenia.sote.hu/ftp/mirrors/www.apache.org/hbase/1.2.4/hbase-1.2.4-bin.tar.gz -O hbase.tar.gz && tar zxf hbase.tar.gz && mv /opt/hbase-1.2.4 /opt/hbase && rm hbase.tar.gz
+FROM elek/bigdata-base:6 
+ADD url .
+ENV CONF_DIR /opt/hbase/conf
+RUN wget `cat url` -O hbase.tar.gz && tar zxf hbase.tar.gz && rm hbase.tar.gz && mv /opt/hbase* /opt/hbase
 RUN mv /opt/hbase/conf /opt/hbase/conf.orig
+ADD log4j.properties /opt/hbase/conf/ 

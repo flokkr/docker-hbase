@@ -1,4 +1,2 @@
 FROM elek/hbase-master
-COPY start.sh .
-CMD ["/opt/start.sh"]
-
+CMD ["/opt/hbase/bin/hbase regionserver start"]

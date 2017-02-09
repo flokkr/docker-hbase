@@ -1,4 +1,4 @@
-FROM elek/bigdata-base:9
+FROM elek/bigdata-base:10
 ADD url .
 ENV CONF_DIR /opt/hbase/conf
 RUN wget `cat url` -O hbase.tar.gz && tar zxf hbase.tar.gz && rm hbase.tar.gz && mv /opt/hbase* /opt/hbase

@@ -1,2 +1,2 @@
-FROM elek/hbase-master:latest
+FROM flokkr/hbase:build
 CMD ["/opt/hbase/bin/hbase regionserver start"]

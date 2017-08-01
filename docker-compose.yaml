@@ -1,0 +1,59 @@
+version: "3"
+services:
+   namenode:
+      image: flokkr/hadoop-hdfs-namenode:latest
+      hostname: namenode
+      ports:
+         - 50070:50070
+         - 9870:9870
+      env_file:
+        - ./compose-config
+      environment:
+          ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+   datanode:
+      image: flokkr/hadoop-hdfs-datanode:latest
+      links:
+         - namenode
+      env_file:
+        - ./compose-config
+   zookeeper:
+      image: flokkr/zookeeper
+      hostname: zookeeper1
+      environment:
+        ZOO.CFG_clientPort: 2181
+        ZOO.CFG_dataDir: /tmp/zookeeper
+   hbasemaster:
+      container_name: hbasemaster
+      domainname: hbase
+      image: flokkr/hbase-master
+      hostname: hbasemaster
+      ports:
+        - 16010:16010
+      env_file:
+        - ./compose-config
+   hbaseregion1:
+      container_name: hbaseregion1
+      image: flokkr/hbase-regionserver
+      domainname: hbase
+      hostname: hbaseregion1
+      env_file:
+        - ./compose-config
+   hbaseregion2:
+      container_name: hbaseregion2
+      image: flokkr/hbase-regionserver
+      domainname: hbase
+      hostname: hbaseregion2
+      env_file:
+        - ./compose-config
+   hbaseregion3:
+      container_name: hbaseregion3
+      image: flokkr/hbase-regionserver
+      domainname: hbase
+      hostname: hbaseregion3
+      env_file:
+        - ./compose-config
+networks:
+  default:
+    external:
+      name: hbase
+

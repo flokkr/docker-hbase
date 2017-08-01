@@ -1,4 +1,3 @@
-FROM elek/hbase-base:latest
-ADD defaults/* defaults/
+FROM flokkr/hbase:build
 CMD ["/opt/hbase/bin/hbase master start"]
 

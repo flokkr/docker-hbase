@@ -1,17 +1,18 @@
 version: "3"
 services:
    namenode:
-      image: flokkr/hadoop-hdfs-namenode:latest
+      image: flokkr/hadoop:latest
       hostname: namenode
+      command: ["hdfs","namenode"]
       ports:
-         - 50070:50070
          - 9870:9870
       env_file:
         - ./compose-config
       environment:
-          ENSURE_NAMENODE_DIR: "/tmp/hadoop-root/dfs/name"
+          ENSURE_NAMENODE_DIR: "/tmp/hadoop-hadoop/dfs/name"
    datanode:
-      image: flokkr/hadoop-hdfs-datanode:latest
+      image: flokkr/hadoop:latest
+      command: ["hdfs","datanode"]
       links:
          - namenode
       env_file:
@@ -25,7 +26,8 @@ services:
    hbasemaster:
       container_name: hbasemaster
       domainname: hbase
-      image: flokkr/hbase-master
+      image: flokkr/hbase
+      command: ["hbase","master","start"]
       hostname: hbasemaster
       ports:
         - 16010:16010
@@ -33,27 +35,31 @@ services:
         - ./compose-config
    hbaseregion1:
       container_name: hbaseregion1
-      image: flokkr/hbase-regionserver
+      image: flokkr/hbase
+      command: ["hbase","regionserver","start"]
       domainname: hbase
       hostname: hbaseregion1
       env_file:
         - ./compose-config
    hbaseregion2:
       container_name: hbaseregion2
-      image: flokkr/hbase-regionserver
+      image: flokkr/hbase
+      command: ["hbase","regionserver","start"]
       domainname: hbase
       hostname: hbaseregion2
       env_file:
         - ./compose-config
    hbaseregion3:
       container_name: hbaseregion3
-      image: flokkr/hbase-regionserver
+      image: flokkr/hbase
+      command: ["hbase","regionserver","start"]
       domainname: hbase
       hostname: hbaseregion3
       env_file:
         - ./compose-config
 networks:
-  default:
-    external:
-      name: hbase
+   default:
+      external:
+         name: hbase
+
 

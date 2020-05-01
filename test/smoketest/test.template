@@ -1,3 +1,4 @@
 create 'personal', 'personal_data'
 put 'personal',1,'personal_data:name','Kossuth'
-get 'personal' 1
+get 'personal',1
+exit

@@ -30,12 +30,37 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data
+        - name: smoketest
+          mountPath: /opt/smoketest
         envFrom:
         - configMapRef:
             name: hbase-config
+        - configMapRef:
+            name: hdfs-config
       volumes:
       - name: config
         configMap:
           name: hbase-config
       - name: data
         emptyDir: {}
+      - name: script
+        configMap:
+          name: hbase-init-hdfs
+          defaultMode: 493
+      - name: smoketest
+        hostPath:
+          path: /home/elek/projects/flokkr/docker-hbase/test/smoketest
+      initContainers:
+      - name: script
+        image: flokkr/hadoop:3.2.1
+        args:
+        - /opt/script/init.sh
+        volumeMounts:
+        - name: script
+          mountPath: /opt/script/init.sh
+          subPath: init.sh
+        - name: smoketest
+          mountPath: /opt/smoketest
+        envFrom:
+        - configMapRef:
+            name: hdfs-config

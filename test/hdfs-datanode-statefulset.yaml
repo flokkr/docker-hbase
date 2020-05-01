@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: hdfs-datanode
-        image: flokkr/hadoop
+        image: flokkr/hadoop:3.2.1
         args:
         - hdfs
         - datanode
@@ -31,6 +31,8 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data
+        - name: smoketest
+          mountPath: /opt/smoketest
         envFrom:
         - configMapRef:
             name: hdfs-config
@@ -40,3 +42,6 @@ spec:
           name: hdfs-config
       - name: data
         emptyDir: {}
+      - name: smoketest
+        hostPath:
+          path: /home/elek/projects/flokkr/docker-hbase/test/smoketest

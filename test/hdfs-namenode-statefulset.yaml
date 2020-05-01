@@ -21,7 +21,7 @@ spec:
     spec:
       initContainers:
       - name: hdfs-init
-        image: flokkr/hadoop
+        image: flokkr/hadoop:3.2.1
         args:
         - hadoop
         - version
@@ -34,9 +34,11 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data
+        - name: smoketest
+          mountPath: /opt/smoketest
       containers:
       - name: hdfs-namenode
-        image: flokkr/hadoop
+        image: flokkr/hadoop:3.2.1
         args:
         - hdfs
         - namenode
@@ -46,6 +48,11 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data
+        - name: smoketest
+          mountPath: /opt/smoketest
       volumes:
       - name: data
         emptyDir: {}
+      - name: smoketest
+        hostPath:
+          path: /home/elek/projects/flokkr/docker-hbase/test/smoketest

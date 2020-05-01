@@ -1,13 +1,17 @@
 source:
 - path: ..
 - url: github.com/flokkr/k8s
+- url: github.com/flokkr/infra-flekszible
 import:
+- path: util
 - path: zookeeper
   transformations:
   - type: image
     image: flokkr/zookeeper:3.6.1
 - path: hdfs
   transformations:
+  - type: image
+    image: flokkr/hadoop:3.2.1
   - type: hdfs/onenode
   - type: add
     trigger:
@@ -18,3 +22,12 @@ import:
     value:
       NAMENODE_INIT: "hdfs dfs -chmod 777 /"
 - path: hbase
+  transformations:
+  - type: util/initwithconfigmap
+    configmap: hbase-init-hdfs
+    scriptname: init.sh
+    image: flokkr/hadoop:3.2.1
+    trigger:
+       metadata:
+          name: hbase-master
+  - type: hdfs/config

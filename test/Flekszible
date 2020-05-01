@@ -1,0 +1,20 @@
+source:
+- path: ..
+- url: github.com/flokkr/k8s
+import:
+- path: zookeeper
+  transformations:
+  - type: image
+    image: flokkr/zookeeper:3.6.1
+- path: hdfs
+  transformations:
+  - type: hdfs/onenode
+  - type: add
+    trigger:
+      metadata:
+        name: hdfs-config
+    path:
+    - data
+    value:
+      NAMENODE_INIT: "hdfs dfs -chmod 777 /"
+- path: hbase

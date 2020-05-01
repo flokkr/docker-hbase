@@ -1,8 +1,9 @@
-FROM flokkr/base:29
-ARG URL
-ENV PATH $PATH:/opt/hbase/bin
+ARG BASE=latest
+FROM flokkr/base:${BASE}
+ARG ARTIFACTDIR
 ENV CONF_DIR /opt/hbase/conf
-RUN adduser -h /opt/ -s /bin/bash -G flokkr -D hbase && chown hbase /opt
+RUN useradd --uid 1000 hbase --gid 1000 -G flokkr --home /opt/hbase && chown hbase /opt
 USER hbase
-RUN wget $URL -O hbase.tar.gz && tar zxf hbase.tar.gz && rm hbase.tar.gz && mv /opt/hbase* /opt/hbase
+ADD --chown=hbase:flokkr ${ARTIFACTDIR} /opt/hbase
+ENV PATH $PATH:/opt/hbase/bin
 WORKDIR /opt/hbase

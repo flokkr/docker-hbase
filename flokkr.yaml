@@ -1,0 +1,8 @@
+name: hbase
+basetag: 36
+urlpath: hbase/%s/hbase-%s-bin.tar.gz
+containers:
+   - flokkr/hbase
+git: https://github.com/flokkr/docker-hbase
+versions:
+  - 2.2.4

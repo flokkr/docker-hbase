@@ -3,6 +3,9 @@ kind: ConfigMap
 metadata:
   name: hbase-config
 data:
+
+  HBASE-SITE.XML_hbase.regionserver.thrift.framed: "false"
+  HBASE-SITE.XML_hbase.regionserver.thrift.compact: "true"
   HBASE-SITE.XML_hbase.rootdir: hdfs://hdfs-namenode-0.hdfs-namenode:9820/hbase
   HBASE-SITE.XML_hbase.cluster.distributed: "true"
   HBASE-SITE.XML_hbase.zookeeper.quorum: zookeeper-0.zookeeper

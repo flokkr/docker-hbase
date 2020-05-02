@@ -1,6 +1,7 @@
 name: test
 on:
   - push
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,8 +25,3 @@ jobs:
       - name: Run test
         run: |
           ./test/test.sh
-      - uses: actions/upload-artifact@master
-        if: always()
-        with:
-          name: robot
-          path: test/result

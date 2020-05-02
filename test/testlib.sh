@@ -2,7 +2,7 @@
 
 retry() {
    n=0
-   until [ $n -ge 30 ]
+   until [ $n -ge 600 ]
    do
       "$@" && break
       n=$[$n+1]

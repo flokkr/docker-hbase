@@ -31,12 +31,14 @@ Execute
     Should Be Equal As Integers     ${rc}                       0
     [return]                        ${output}
 
-*** Keywords ***
 Generate prefix
    ${random} =         Generate Random String  5  [NUMBERS]
    Set Suite Variable  ${prefix}  ${random}
 
 *** Test Cases ***
+Execute hbase version
+   Execute       hbase version
+
 Smoketest hbase shell
    Generate prefix
    Execute       cat /opt/smoketest/test.template | sed 's/personal/t${prefix}/' > /tmp/test.hbase

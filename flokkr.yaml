@@ -5,4 +5,5 @@ containers:
    - flokkr/hbase
 git: https://github.com/flokkr/docker-hbase
 versions:
-  - 2.2.4
+  - 2.3.0
+  - 2.2.5

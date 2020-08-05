@@ -1,7 +1,7 @@
 source:
 - path: ..
-- url: github.com/flokkr/k8s
-- url: github.com/flokkr/infra-flekszible
+- url: github.com/flokkr/docker-hadoop
+- url: github.com/flokkr/docker-zookeeper
 import:
 - path: util
 - path: zookeeper

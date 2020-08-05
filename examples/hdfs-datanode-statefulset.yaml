@@ -31,7 +31,7 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data
-        - name: smoketest
+        - name: mount
           mountPath: /opt/smoketest
         envFrom:
         - configMapRef:
@@ -42,6 +42,6 @@ spec:
           name: hdfs-config
       - name: data
         emptyDir: {}
-      - name: smoketest
+      - name: mount
         hostPath:
-          path: /home/elek/projects/flokkr/docker-hbase/test/smoketest
+          path: /home/elek/projects/flokkr/docker-hbase/examples/smoketest

@@ -1,0 +1,36 @@
+name: util/initwithconfigmap
+parameters:
+  - name: configmap
+    type: string
+  - name: scriptname
+    type: string
+  - name: image
+    type: string
+    default: flokkr/base:36
+---
+- type: add
+  path:
+  - spec
+  - template
+  - spec
+  - initContainers
+  value:
+    - name: script
+      image: {{.image}}
+      args:
+      - /opt/script/{{.scriptname}}
+      volumeMounts:
+      - name: script
+        mountPath: /opt/script/{{.scriptname}}
+        subPath: {{.scriptname}}
+- type: add
+  path:
+  - spec
+  - template
+  - spec
+  - volumes
+  value:
+      - name: script
+        configMap:
+           name: {{.configmap}}
+           defaultMode: 0755

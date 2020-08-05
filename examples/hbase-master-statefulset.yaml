@@ -30,7 +30,7 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data
-        - name: smoketest
+        - name: mount
           mountPath: /opt/smoketest
         envFrom:
         - configMapRef:
@@ -47,9 +47,9 @@ spec:
         configMap:
           name: hbase-init-hdfs
           defaultMode: 493
-      - name: smoketest
+      - name: mount
         hostPath:
-          path: /home/elek/projects/flokkr/docker-hbase/test/smoketest
+          path: /home/elek/projects/flokkr/docker-hbase/examples/smoketest
       initContainers:
       - name: script
         image: flokkr/hadoop:3.2.1
@@ -59,7 +59,7 @@ spec:
         - name: script
           mountPath: /opt/script/init.sh
           subPath: init.sh
-        - name: smoketest
+        - name: mount
           mountPath: /opt/smoketest
         envFrom:
         - configMapRef:

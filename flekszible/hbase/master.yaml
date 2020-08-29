@@ -31,11 +31,9 @@ spec:
     spec:
       containers:
         - name: hbase-master
-          image: flokkr/hbase:2.2.4
+          image: flokkr/hbase
           args: ["hbase","master","start"]
           env:
-              - name: WAITFOR
-                value: "hdfs-namenode-0.hdfs-namenode:9820"
           volumeMounts:
           - name: data
             mountPath: /data

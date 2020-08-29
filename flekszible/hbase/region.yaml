@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
         - name: hbase-region
-          image: flokkr/hbase:2.2.4
+          image: flokkr/hbase
           args: ["hbase","regionserver","start"]
           volumeMounts:
           - name: data

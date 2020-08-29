@@ -33,7 +33,6 @@ spec:
         - name: hbase-master
           image: flokkr/hbase
           args: ["hbase","master","start"]
-          env:
           volumeMounts:
           - name: data
             mountPath: /data

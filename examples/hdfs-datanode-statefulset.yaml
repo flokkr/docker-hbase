@@ -3,6 +3,9 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: hdfs-datanode
+  labels:
+    app: hdfs
+    component: datanode
 spec:
   serviceName: hdfs-datanode
   replicas: 3

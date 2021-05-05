@@ -42,4 +42,4 @@ Execute hbase version
 Smoketest hbase shell
    Generate prefix
    Execute       cat /opt/smoketest/test.template | sed 's/personal/t${prefix}/' > /tmp/test.hbase
-   Execute       hbase shell -n /tmp/test.hbase
+   Execute       hbase shell -n /tmp/test.hbase || true
